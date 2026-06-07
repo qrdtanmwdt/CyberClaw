@@ -245,7 +245,7 @@ async def async_main():
 
         with patch_stdout():
             worker = asyncio.create_task(agent_worker())
-            heartbeat_worker = asyncio.create_task(pacemaker_loop(check_interval=10))
+            heartbeat_worker = asyncio.create_task(pacemaker_loop(task_queue=task_queue, check_interval=10))
             await user_input_loop()
             await task_queue.join()
             worker.cancel()
